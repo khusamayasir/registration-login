@@ -5,5 +5,5 @@ function postVal() {
     const phonenumber = document. getElementById('pno'). value;
     const gender = document. getElementById('gndr'). value;
 
-    console.log(username, password);
+    console.log(username, email, password, phonenumber, gender);
 }
