@@ -21,6 +21,20 @@ app.post('/api/signup', function(req, res) {
   })
 })
 
+app.post('/api/login', function(req, res) {
+  const { username, password} = req.body
+  const query = `SELECT COUNT(*) FROM signupuser WHERE UserName= ${username} AND Password= ${password}`; 
+
+  new sql.Request().query(query, function(err, result) {
+    if (err) 
+    {
+      console.log(err)
+    }
+    res.send(result)
+  })
+})
+
+
 // const path = require('path');
 
   // serve your css as static
