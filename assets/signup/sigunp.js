@@ -1,9 +1,16 @@
 function postVal() {
-    const username = document. getElementById('usrname'). value;
-    const email = document. getElementById('email'). value;
-    const password = document. getElementById('psw'). value;
-    const phonenumber = document. getElementById('pno'). value;
-    const gender = document. getElementById('gndr'). value;
+    const data = {
+     username: document. getElementById('usrname').value,
+     email: document. getElementById('email').value,
+     password: document. getElementById('psw').value,
+     phonenumber: document. getElementById('pno').value,
+     gender: document. getElementById('gndr').value
+    }
 
-    console.log(username, email, password, phonenumber, gender);
+    fetch('/api/signup',{
+        type:"POST",
+        data:JSON.stringify(data)
+    })
+    
+    //console.log(username, email, password, phonenumber, gender);
 }
