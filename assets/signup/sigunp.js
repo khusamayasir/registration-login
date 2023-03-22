@@ -11,6 +11,7 @@ function postVal() {
         type:"POST",
         data:JSON.stringify(data)
     })
-    
+
+    alert("Congratulations!! You've Successfully Signup.");
     //console.log(username, email, password, phonenumber, gender);
 }

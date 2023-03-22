@@ -16,5 +16,7 @@ function postVal() {
         data:JSON.stringify(data)
     })
 
-    console.log(username, password);
+    alert("Congratulations!! You've Successfully Login.")
+
+    //console.log(username, password);
 }
