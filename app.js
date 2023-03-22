@@ -23,6 +23,10 @@ app.use(express.static('assets/signup'));
 //         encrypt: true, // For secure connection
 //         trustServerCertificate: true,
 //     }
+
+
+
+
 // };
 
 // const pool = new sql.ConnectionPool(config);
