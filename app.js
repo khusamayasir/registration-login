@@ -8,6 +8,19 @@ app.listen(3000, () => {
     console.log("Application started and Listening on port 3000");
 });
 
+app.post('/api/signup', function(req, res) {
+  const { username, email, password, phonenumber, gender} = req.body
+  const query = `INSERT INTO signupuser (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}, '${gender}')`
+
+  new sql.Request().query(query, function(err, result) {
+    if (err) 
+    {
+      console.log(err)
+    }
+    res.send(result)
+  })
+})
+
 // const path = require('path');
 
   // serve your css as static
