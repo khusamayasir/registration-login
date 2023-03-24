@@ -1,3 +1,5 @@
+const { response } = require("express")
+
 function postVal() {
     const data = {
      username: document. getElementById('usrname').value,
@@ -7,11 +9,17 @@ function postVal() {
      gender: document. getElementById('gndr').value
     }
 
-    fetch('/api/signup',{
-        type:"POST",
-        data:JSON.stringify(data)
+    fetch('/api/signup', {
+        method: "POST",
+        data: JSON.stringify(data)
+    })
+    
+    .then((res)=> {
+        console.log("Congratulations!! You've Successfully Signup.")
+    })
+    .catch(err => {
+        console.log(err)
     })
 
-    alert("Congratulations!! You've Successfully Signup.");
     //console.log(username, email, password, phonenumber, gender);
 }

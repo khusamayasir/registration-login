@@ -5,29 +5,31 @@ app.use(express.static('assets/login'));
 app.use(express.static('assets/signup'));
 
 app.listen(3000, () => {
-    console.log("Application started and Listening on port 3000");
+  console.log("Application started and Listening on port 3000");
 });
 
-app.post('/api/signup', function(req, res) {
-  const { username, email, password, phonenumber, gender} = req.body
-  const query = `INSERT INTO signupuser (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}, '${gender}')`
+app.post('/api/signup', function (req, res) {
+  try {
+    const { username, email, password, phonenumber, gender } = req.body
+    const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}, '${gender}')`
 
-  new sql.Request().query(query, function(err, result) {
-    if (err) 
-    {
-      console.log(err)
-    }
-    res.send(result)
-  })
+    new sql.Request().query(query, function (err, result) {
+      if (err) {
+        console.log(err)
+      }
+      res.send("resuslt")
+    })
+  } catch (e) {
+    res.send(req.body)
+  }
 })
 
-app.post('/api/login', function(req, res) {
-  const { username, password} = req.body
-  const query = `SELECT COUNT(*) FROM signupuser WHERE UserName= ${username} AND Password= ${password}`; 
+app.post('/api/login', function (req, res) {
+  const { username, password } = req.body
+  const query = `SELECT COUNT(*) FROM usersignup WHERE UserName= ${username} AND Password= ${password}`;
 
-  new sql.Request().query(query, function(err, result) {
-    if (err) 
-    {
+  new sql.Request().query(query, function (err, result) {
+    if (err) {
       console.log(err)
     }
     res.send(result)

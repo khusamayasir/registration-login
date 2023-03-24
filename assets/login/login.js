@@ -7,16 +7,19 @@
 
 function postVal() {
     const data = {
-        username : document. getElementById('usrname').value,
-        password : document. getElementById('psw').value
+        username: document.getElementById('usrname').value,
+        password: document.getElementById('psw').value
     }
-    
-    fetch('/api/login',{
-        type:"POST",
-        data:JSON.stringify(data)
+
+    fetch('/api/login', {
+        type: "POST",
+        data: JSON.stringify(data)
+    }).then(res => {
+        console.log("Congratulations!! You've Successfully Login.")
+    }).catch(err => {
+        console.log(err)
     })
 
-    alert("Congratulations!! You've Successfully Login.")
 
     //console.log(username, password);
 }
