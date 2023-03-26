@@ -1,8 +1,14 @@
-// const sql = require('mssql');
+const sql = require('mssql');
+const bodyParser = require('body-parser');
 const express = require('express');
+const { myDb } = require('./data');
 const app = express();
 
 //Call Signup & Login Pages
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json())
 app.use(express.static('assets/login'));
 app.use(express.static('assets/signup'));
 
@@ -30,6 +36,7 @@ app.use(express.static('assets/signup'));
 // });
 
 //Running App on port 3000 :)
+myDb()
 app.listen(3000, () => {
   console.log("Application started and Listening on port 3000");
 });
@@ -51,15 +58,19 @@ app.post('/api/signup', function (req, res) {
 })
 
 app.post('/api/login', function (req, res) {
+  console.log(`This is from my end point api/login`, req.body)
   const { username, password } = req.body
   const query = `SELECT COUNT(*) FROM usersignup WHERE UserName= ${username} AND Password= ${password}`;
 
-  new sql.Request().query(query, function (err, result) {
-    if (err) {
-      console.log(err)
-    }
-    res.send(result)
-  })
+  // new sql.Request().query(query, function (err, result) {
+  //   if (err) {
+  //     console.log(err)
+  //   }
+  //   console.log(`this is my result from db`, result)
+  //   res.send(result)
+  // })
+
+  res.send(`I am logged in from db, hurraaaa!`)
 })
 
 
