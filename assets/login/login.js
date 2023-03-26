@@ -10,15 +10,15 @@ console.log(`this is my btn element from login js file`, btn)
 
 btn.addEventListener('click', event => {
     event.preventDefault()
-    postVal();
+    getVal();
   });
 
-function postVal() {
+function getVal() {
     const data = {
         username: document.getElementById('usrname').value,
         password: document.getElementById('psw').value
     }
-    console.log(data, `I got this data here from post val func`)
+    console.log(data, `I got this data here from get val func`)
 
     fetch('/api/login', {
         method: "POST",
