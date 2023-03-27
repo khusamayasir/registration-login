@@ -14,10 +14,12 @@ const config = {
 
 const pool = new sql.ConnectionPool(config);
 
-pool.connect().then(() => {
+const myDb = () => pool.connect().then(() => {
     return pool.request().query('SELECT * FROM loginuser');
 }).then(result => {
-    console.log(result.recordset);
+    console.log(`from pool db is connected`,result.recordset);
 }).catch(err => {
     console.log(err);
 });
+
+module.exports = {myDb}
