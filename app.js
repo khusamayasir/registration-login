@@ -62,8 +62,8 @@ app.post('/api/signup', function (req, res) {
 app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const { email, password } = req.body
-  const query = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
-
+  const query = `SELECT * FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
+  console.log("HEY");
   new sql.Request(config).query(query, function (err, result) {
     if (err) {
       console.log(err)
