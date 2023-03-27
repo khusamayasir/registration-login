@@ -15,7 +15,7 @@ btn.addEventListener('click', event => {
 
 function getVal() {
     const data = {
-        username: document.getElementById('usrname').value,
+        email: document.getElementById('email').value,
         password: document.getElementById('psw').value
     }
     console.log(data, `I got this data here from get val func`)
