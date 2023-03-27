@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const bodyParser = require('body-parser');
 const express = require('express');
-const { myDb } = require('./data');
+const { myDb } = require('./data.js');
 const app = express();
 
 //Call Signup & Login Pages
@@ -12,18 +12,18 @@ app.use(bodyParser.json())
 app.use(express.static('assets/login'));
 app.use(express.static('assets/signup'));
 
-// //SQL CONNECTION
-// const config = {
-//     server: 'ppsserver2',
-//     database: 'registration-login',
-//     user: 'sa',
-//     password: 'Admin@123',
-//     port: 1433, // Default MSSQL port is 1433
-//     options: {
-//         encrypt: true, // For secure connection
-//         trustServerCertificate: true,
-//     }
-// };
+//SQL CONNECTION
+const config = {
+    server: 'ppsserver2',
+    database: 'registration-login',
+    user: 'sa',
+    password: 'Admin@123',
+    port: 1433, // Default MSSQL port is 1433
+    options: {
+        encrypt: true, // For secure connection
+        trustServerCertificate: true,
+    }
+};
 
 // const pool = new sql.ConnectionPool(config);
 
@@ -44,9 +44,11 @@ app.listen(3000, () => {
 app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
-  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')`
+  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
 
-  new sql.Request().query(query, function (err, result) {
+// const pool = new sql.ConnectionPool(config);
+
+  new sql.Request(config).query(query, function (err, result) {
     if (err) {
       console.log(err)
       res.status(500).send("Error inserting user into database")
@@ -57,13 +59,12 @@ app.post('/api/signup', function (req, res) {
   })
 })
 
-
 app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const { username, password } = req.body
   const query = `SELECT COUNT(*) FROM usersignup WHERE UserName= '${username}' AND Password= '${password}'`;
 
-  new sql.Request().query(query, function (err, result) {
+  new sql.Request(config).query(query, function (err, result) {
     if (err) {
       console.log(err)
       res.status(500).send("Error querying database")
