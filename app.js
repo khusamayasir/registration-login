@@ -57,22 +57,22 @@ app.post('/api/signup', function (req, res) {
   })
 })
 
+
 app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const { username, password } = req.body
-  const query = `SELECT COUNT(*) FROM usersignup WHERE UserName= ${username} AND Password= ${password}`;
+  const query = `SELECT COUNT(*) FROM usersignup WHERE UserName= '${username}' AND Password= '${password}'`;
 
-  // new sql.Request().query(query, function (err, result) {
-  //   if (err) {
-  //     console.log(err)
-  //   }
-  //   console.log(`this is my result from db`, result)
-  //   res.send(result)
-  // })
-
-  res.send(`I am logged in from db, hurraaaa!`)
+  new sql.Request().query(query, function (err, result) {
+    if (err) {
+      console.log(err)
+      res.status(500).send("Error querying database")
+    } else {
+      console.log(`this is my result from db`, result)
+      res.send(result)
+    }
+  })
 })
-
 
 // const path = require('path');
 
