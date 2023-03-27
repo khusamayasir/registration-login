@@ -44,17 +44,17 @@ app.listen(3000, () => {
 app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
-  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}, '${gender}')`
+  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')`
 
-    // new sql.Request().query(query, function (err, result) {
-    //   if (err) {
-    //     console.log(err)
-    //   }
-    //   console.log(`this is my result from db`, result)
-    //   res.send("resuslt")
-    // })
- 
-    res.send(`I am signedup in from db, hurraaaa!`)
+  new sql.Request().query(query, function (err, result) {
+    if (err) {
+      console.log(err)
+      res.status(500).send("Error inserting user into database")
+    } else {
+      console.log(`this is my result from db`, result)
+      res.send("User inserted into database")
+    }
+  })
 })
 
 app.post('/api/login', function (req, res) {
