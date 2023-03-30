@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(express.static('assets/login/'));
 app.use(express.static('assets/signup/'));
+app.use(express.static("./routes/userRoutes"));
 
 //SQL CONNECTION
 const config = {
