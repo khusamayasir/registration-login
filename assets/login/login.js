@@ -21,7 +21,7 @@ function getVal() {
     console.log(data, `I got this data here from get val func`)
 
     fetch('/api/login', {
-        method: "GET",
+        method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({'content-type': 'application/json'}),
         //data: JSON.stringify(data)
