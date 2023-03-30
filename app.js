@@ -46,12 +46,13 @@ app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
   const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
+  
   const pool = new sql.ConnectionPool(config);
   
   pool.connect().then(() => {
     return pool.request().query(query);
   }).then(result => {  
-    console.log(`this is my result from db`, result.recordsets)
+    console.log(`this is my result from db`, result.recordset)
     res.send("User inserted into database")
     //console.log(`from pool db is connected`,result.recordset);
   }).catch(err => {
@@ -60,25 +61,41 @@ app.post('/api/signup', function (req, res) {
   });
 })
 
+
+const configl = {
+  server: 'ppsserver2',
+  database: 'registration-login',
+  user: 'sa',
+  password: 'Admin@123',
+  port: 1433, // Default MSSQL port is 1433
+  options: {
+      encrypt: true, // For secure connection
+      trustServerCertificate: true,
+  }
+};
+
 //LOGIN APPI
-// app.post('/api/login', function (req, res) {
-//   console.log(`This is from my end point api/login`, req.body)
-//   const {email, password } = req.body
-//   const query = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;;
+app.get('/api/login', function (req, res) {
+  console.log(`This is from my end point api/login`, req.body)
+  const {email, password } = req.body
+  const query_login = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
+  // console.log(email,password)
 
-//   const pool = new sql.ConnectionPool(config);
+  const pool = new sql.ConnectionPool(configl);
 
-//   pool.connect().then(() => {
-//     return pool.request().query(query);
-// }).then(result => {
-//   console.log(`this is my result from db`, result)
-//   res.send(result)
-//   //console.log(`from pool db is connected`,result.recordset);
-// }).catch(err => {
-//   console.log(err)
-//   res.status(500).send("Error querying database")
-// });
-// })
+  pool.connect().then(() => {
+    return pool.request().query(query_login);
+  }).then(result => {
+    // let Result=JSON.parse(result)
+    //alert("CONGRATULATIONS!!!!")
+    console.log(`this is my result from db`, result)
+    res.send(result)
+    //console.log(`from pool db is connected`,result.recordset);
+  }).catch(err => {
+    console.log(err)
+    res.status(500).send("Error querying database")
+  });
+})
 
 // const path = require('path');
 
