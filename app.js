@@ -41,6 +41,7 @@ app.listen(3000, () => {
   console.log("Application started and Listening on port 3000");
 });
 
+//SIGNUP APPI
 app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
@@ -48,9 +49,8 @@ app.post('/api/signup', function (req, res) {
 
 const pool = new sql.ConnectionPool(config);
 
-
 pool.connect().then(() => {
-    return pool.request().query(query);
+  return pool.request().query(query);
 }).then(result => {
   console.log(`this is my result from db`, result.recordsets)
   res.send("User inserted into database")
@@ -59,9 +59,9 @@ pool.connect().then(() => {
   console.log(err)
   res.status(500).send("Error inserting user into database")
 });
-
 })
 
+//LOGIN APPI
 // app.post('/api/login', function (req, res) {
 //   console.log(`This is from my end point api/login`, req.body)
 //   const {email, password } = req.body
