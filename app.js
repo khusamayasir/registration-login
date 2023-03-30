@@ -46,19 +46,18 @@ app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
   const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
-
-const pool = new sql.ConnectionPool(config);
-
-pool.connect().then(() => {
-  return pool.request().query(query);
-}).then(result => {
-  console.log(`this is my result from db`, result.recordsets)
-  res.send("User inserted into database")
-  //console.log(`from pool db is connected`,result.recordset);
-}).catch(err => {
-  console.log(err)
-  res.status(500).send("Error inserting user into database")
-});
+  const pool = new sql.ConnectionPool(config);
+  
+  pool.connect().then(() => {
+    return pool.request().query(query);
+  }).then(result => {  
+    console.log(`this is my result from db`, result.recordsets)
+    res.send("User inserted into database")
+    //console.log(`from pool db is connected`,result.recordset);
+  }).catch(err => {
+    console.log(err)
+    res.status(500).send("Error inserting user into database")
+  });
 })
 
 //LOGIN APPI
