@@ -46,7 +46,7 @@ app.post('/api/signup', function (req, res) {
   const { username, email, password, phonenumber, gender } = req.body
   const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
 
-// const pool = new sql.ConnectionPool(config);
+const pool = new sql.ConnectionPool(config);
 
 
 pool.connect().then(() => {
