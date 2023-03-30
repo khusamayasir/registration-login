@@ -75,7 +75,7 @@ const configl = {
 };
 
 //LOGIN APPI
-app.get('/api/login', function (req, res) {
+app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const {email, password } = req.body
   const query_login = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
