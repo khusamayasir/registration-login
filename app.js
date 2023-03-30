@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const bodyParser = require('body-parser');
 const express = require('express');
-const { myDb } = require('./data.js');
+const { myDb } = require('./data');
 const app = express();
 
 //Call Signup & Login Pages
@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json())
-app.use(express.static('assets/login'));
-app.use(express.static('assets/signup'));
+app.use(express.static('assets/login/'));
+app.use(express.static('assets/signup/'));
 
 //SQL CONNECTION
 const config = {
@@ -48,32 +48,38 @@ app.post('/api/signup', function (req, res) {
 
 // const pool = new sql.ConnectionPool(config);
 
-  new sql.Request(config).query(query, function (err, result) {
-    if (err) {
-      console.log(err)
-      res.status(500).send("Error inserting user into database")
-    } else {
-      console.log(`this is my result from db`, result)
-      res.send("User inserted into database")
-    }
-  })
+
+pool.connect().then(() => {
+    return pool.request().query(query);
+}).then(result => {
+  console.log(`this is my result from db`, result.recordsets)
+  res.send("User inserted into database")
+  //console.log(`from pool db is connected`,result.recordset);
+}).catch(err => {
+  console.log(err)
+  res.status(500).send("Error inserting user into database")
+});
+
 })
 
-app.post('/api/login', function (req, res) {
-  console.log(`This is from my end point api/login`, req.body)
-  const { email, password } = req.body
-  const query = `SELECT * FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
-  console.log("HEY");
-  new sql.Request(config).query(query, function (err, result) {
-    if (err) {
-      console.log(err)
-      res.status(500).send("Error querying database")
-    } else {
-      console.log(`this is my result from db`, result)
-      res.send(result)
-    }
-  })
-})
+// app.post('/api/login', function (req, res) {
+//   console.log(`This is from my end point api/login`, req.body)
+//   const {email, password } = req.body
+//   const query = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;;
+
+//   const pool = new sql.ConnectionPool(config);
+
+//   pool.connect().then(() => {
+//     return pool.request().query(query);
+// }).then(result => {
+//   console.log(`this is my result from db`, result)
+//   res.send(result)
+//   //console.log(`from pool db is connected`,result.recordset);
+// }).catch(err => {
+//   console.log(err)
+//   res.status(500).send("Error querying database")
+// });
+// })
 
 // const path = require('path');
 

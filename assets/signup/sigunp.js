@@ -28,5 +28,5 @@ function postVal() {
     }).catch(err => {
         console.log(err)
     })
-    //console.log(username, email, password, phonenumber, gender);
+    console.log(username, email, password, phonenumber, gender);
 }
