@@ -36,18 +36,6 @@ function getVal() {
     .catch(err => {
         console.log(err)
     })
-    
-    // fetch('/generateToken', {
-    //     method: "GET",
-    //     //body: JSON.stringify(data)
-    // }).then(res => 
-    //     //console.log('hey')
-    //     res.json()
-    // ).then(data => {
-    //     // console.log("Congratulations!! You've Successfully Login.")
-    //     console.log(data.token)
-    // }).catch(err => {
-    //     console.log(err)
-    // })
+
     //console.log(username, password);
 }
