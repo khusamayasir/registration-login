@@ -81,7 +81,6 @@ app.post('/api/login', function (req, res) {
     return pool.request().query(query_login);
   }).then(result => {
     // let Result=JSON.parse(result)
-    //alert("CONGRATULATIONS!!!!")
     console.log(`this is my result from db`, result.recordset)
     //res.send(result)
     
