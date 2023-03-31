@@ -26,8 +26,10 @@ function getVal() {
         headers: new Headers({'content-type': 'application/json'}),
         //data: JSON.stringify(data)
     }).then(res => {
+        res.json()
+    }).then(data => {
         // console.log("Congratulations!! You've Successfully Login.")
-        console.log(res)
+        console.log(data)
     }).catch(err => {
         console.log(err)
     })
