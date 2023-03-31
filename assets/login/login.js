@@ -26,14 +26,17 @@ function getVal() {
         headers: new Headers({'content-type': 'application/json'}),
         //data: JSON.stringify(data)
     }).then(res => {
-        res.json()
-    }).then(data => {
-        // console.log("Congratulations!! You've Successfully Login.")
-        console.log(data)
-    }).catch(err => {
+        console.log(res)
+        //res.json()
+    })
+    // .then(data => {
+    //     // console.log("Congratulations!! You've Successfully Login.")
+    //     console.log(data)
+    // })
+    .catch(err => {
         console.log(err)
     })
-
+    
     // fetch('/generateToken', {
     //     method: "GET",
     //     //body: JSON.stringify(data)

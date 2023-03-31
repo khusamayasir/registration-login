@@ -83,13 +83,14 @@ app.post('/api/login', function (req, res) {
     // let Result=JSON.parse(result)
     //alert("CONGRATULATIONS!!!!")
     console.log(`this is my result from db`, result.recordset)
-    res.send(result)
+    //res.send(result)
     
     // Generate a JWT token
-    const token = jwt.sign({ sub: username }, JWT_SECRET_KEY, { expiresIn: '30m' });
+    const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
     
     // Return the token in the response
-    res.json({ access_token: token });
+    res.send({ access_token: token });
+    console.log('Your login token is', token)
     
     //console.log(`from pool db is connected`,result.recordset);
   }).catch(err => {
