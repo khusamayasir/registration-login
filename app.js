@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static('assets/login/'));
 app.use(express.static('assets/signup/'));
+app.use(express.static('assets/home/'));
 //Initialize the express-session
 app.use(session({
   secret: 'your-secret-key', // a secret key used to sign the session ID cookie
