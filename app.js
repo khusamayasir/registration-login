@@ -2,6 +2,7 @@ const sql = require('mssql');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+//const session = require('express-session');
 const { myDb } = require('./data');
 
 const app = express();
@@ -14,10 +15,19 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static('assets/login/'));
 app.use(express.static('assets/signup/'));
+//Initialize the express-session
+// app.use(session({
+//   secret: 'your-secret-key', // a secret key used to sign the session ID cookie
+//   resave: false, // do not save session if unmodified
+//   saveUninitialized: false // do not create a session until something is stored
+// }));
 //app.use(express.static("./routes/userRoutes"));
 
 //Calling data.js
 myDb()
+
+
+
 
 //SQL CONNECTION For SIGNUP
 const config = {
@@ -83,13 +93,20 @@ app.post('/api/login', function (req, res) {
     // let Result=JSON.parse(result)
     console.log(`this is my result from db`, result.recordset)
     //res.send(result)
+
+    if(result["recordset"][0][''] === 1) 
+    {
+      // Generate a JWT token
+      const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
+      
+      // Return the token in the response
+      res.send({ access_token: token });
+      console.log('Your login token is', token)
+    }
+    else {
+      console.log('Sorry Incoorect Username or Password');
+    }
     
-    // Generate a JWT token
-    const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
-    
-    // Return the token in the response
-    res.send({ access_token: token });
-    console.log('Your login token is', token)
     
     //console.log(`from pool db is connected`,result.recordset);
   }).catch(err => {
