@@ -3,6 +3,11 @@
 //     e.preventDefault();
 //     return false;
 // }
+
+//const { json } = require("body-parser");
+
+//const { TokenExpiredError } = require("jsonwebtoken");
+
 // );
 var btn = document.getElementById(`btnMe`);
 
@@ -10,32 +15,45 @@ console.log(`this is my btn element from login js file`, btn)
 
 btn.addEventListener('click', event => {
     event.preventDefault()
-    getVal();
+    getVal('/api/login')
+    .then(result => 
+        {
+            console.log(result)
+        })
+    .catch(error => 
+        {
+            console.log(error)
+        });
   });
 
-function getVal() {
+function getVal(url) {
+    return new Promise((resolve, reject) => {
     const data = {
         email: document.getElementById('email').value,
         password: document.getElementById('psw').value
     }
     console.log(data, `I got this data here from get val func`)
 
-    fetch('/api/login', {
+    fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({'content-type': 'application/json'}),
         //data: JSON.stringify(data)
-    }).then(res => {
-        console.log(res)
-        //res.json()
     })
-    // .then(data => {
-    //     // console.log("Congratulations!! You've Successfully Login.")
-    //     console.log(data)
-    // })
-    .catch(err => {
-        console.log(err)
+    .then(res => {
+        // if (!response.ok)
+        // {
+        //   throw new Error('Network response was not ok');
+        // }
+        return res.json()
+        
+    }).then(result => { 
+        resolve(result)
+        console.log('Data is: ', result)
+    }).catch(error => {
+        console.log('ERROR!!')
+        reject(error)
     })
-
+});
     //console.log(username, password);
 }

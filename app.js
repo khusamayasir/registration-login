@@ -7,7 +7,6 @@ const { myDb } = require('./data');
 
 const app = express();
 
-
 //Call Signup & Login Pages
 app.use(bodyParser.urlencoded({
   extended: true
@@ -98,13 +97,15 @@ app.post('/api/login', function (req, res) {
       const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
       
       // Return the token in the response
-      res.send({ access_token: token });
+      //es.send(result.recordset );
+      res.send({ access_token: token});
       console.log('Your login token is', token)
     }
     else {
       console.log('Sorry!! Incoorect Username or Password');
     }
     //console.log(`from pool db is connected`,result.recordset);
+
   }).catch(err => {
     console.log(err)
     res.status(500).send("Error querying database")
