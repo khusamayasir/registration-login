@@ -98,7 +98,8 @@ app.post('/api/login', function (req, res) {
       
       // Return the token in the response
       //es.send(result.recordset );
-      res.send({ access_token: token});
+      // res.send({access_token: token}, {access_record: result.recordset});
+      res.send({access_token: token});
       console.log('Your login token is', token)
     }
     else {

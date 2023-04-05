@@ -49,6 +49,7 @@ function getVal(url) {
         
     }).then(result => { 
         resolve(result)
+        
         console.log('Data is: ', result)
     }).catch(error => {
         console.log('ERROR!!')
