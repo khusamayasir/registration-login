@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const { myDb } = require('./data');
+const LocalStorage = require('node-localstorage').LocalStorage;
+const localStorage = new LocalStorage('./localstorage');
 
 const app = express();
 
