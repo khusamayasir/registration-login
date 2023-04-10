@@ -96,14 +96,14 @@ app.post('/api/login', function (req, res) {
       // Generate a JWT token
       const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
       
+      // Store the token in local storage
+      localStorage.setItem("jwt_token", token);
+      console.log('your jwt_token: ', token)
+
       // Return the token in the response
       const data = [result.recordset, {access_token: token}, localStorage.getItem("jwt_token")]
       res.send(data);
       console.log('Your login token is', token)
-      
-      // Store the token in local storage
-      localStorage.setItem("jwt_token", token);
-      console.log('your jwt_token: ', token)
     }
     else {
       console.log('Sorry!! Incorrect Username or Password');
