@@ -97,13 +97,16 @@ app.post('/api/login', function (req, res) {
       const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
       
       // Return the token in the response
-      //es.send(result.recordset );
-      // res.send({access_token: token}, {access_record: result.recordset});
-      res.send({access_token: token});
+      const data = [result.recordset, {access_token: token}, localStorage.getItem("jwt_token")]
+      res.send(data);
       console.log('Your login token is', token)
+      
+      // Store the token in local storage
+      localStorage.setItem("jwt_token", token);
+      console.log('your jwt_token: ', token)
     }
     else {
-      console.log('Sorry!! Incoorect Username or Password');
+      console.log('Sorry!! Incorrect Username or Password');
     }
     //console.log(`from pool db is connected`,result.recordset);
 
