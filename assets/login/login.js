@@ -19,6 +19,9 @@ btn.addEventListener('click', event => {
     .then(result => 
         {
             console.log(result)
+            if (result.count == 1){
+                
+            }
         })
     .catch(error => 
         {
@@ -45,12 +48,13 @@ function getVal(url) {
         // {
         //   throw new Error('Network response was not ok');
         // }
-        return res.json()
+        resolve (res.json())
         
-    }).then(result => { 
-        resolve(result)
+    // }).then(result => { 
+    //     resolve(result)
         
-        console.log('Data is: ', result)
+    //     console.log('Data is: ', result)
+    // })
     }).catch(error => {
         console.log('ERROR!!')
         reject(error)

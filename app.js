@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const { myDb } = require('./data');
-const LocalStorage = require('node-localstorage').LocalStorage;
-const localStorage = new LocalStorage('./localstorage');
+//const LocalStorage = require('node-localstorage').LocalStorage;
+//const sessionStorage = new sessionStorage('./localstorage');
 
 const app = express();
 
@@ -98,12 +98,18 @@ app.post('/api/login', function (req, res) {
       // Generate a JWT token
       const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
       
-      // Store the token in local storage
-      localStorage.setItem("jwt_token", token);
-      console.log('your jwt_token: ', token)
+      // // Store the token in local storage
+      // localStorage.setItem("jwt_token", token);
+      // console.log('your jwt_token: ', token)
+
+      // // Remove a value from sessionStorage
+// sessionStorage.removeItem("username");
+
+// // Clear all values from sessionStorage
+// sessionStorage.clear();
 
       // Return the token in the response
-      const data = [result.recordset, {access_token: token}, localStorage.getItem("jwt_token")]
+      const data = {access_token: token, count: result.recordset}
       res.send(data);
       console.log('Your login token is', token)
     }
