@@ -19,9 +19,10 @@ btn.addEventListener('click', event => {
     .then(result => 
         {
             if (result.count.length == 1){
+                window.location.href = "home.html";
                 console.log(result)
             }
-            else if (result.count.length != 1)
+            else if (result.count.length == 0) 
             {
                 alert("Sorry Incorrect Username & Password");
             }
