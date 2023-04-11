@@ -18,9 +18,12 @@ btn.addEventListener('click', event => {
     getVal('/api/login')
     .then(result => 
         {
-            console.log(result)
-            if (result.count == 1){
-                
+            if (result.count.length == 1){
+                console.log(result)
+            }
+            else if (result.count.length != 1)
+            {
+                alert("Sorry Incorrect Username & Password");
             }
         })
     .catch(error => 
