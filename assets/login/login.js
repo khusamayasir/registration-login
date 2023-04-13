@@ -18,11 +18,11 @@ btn.addEventListener('click', event => {
     getVal('/api/login')
     .then(result => 
         {
-            if (result.count.length == 1){
+            if (result.count.length === 1){
                 window.location.href = "home.html";
                 console.log(result)
             }
-            else if (result.count.length == 0) 
+            else if (result.count.length === 0 || result.count.length === null) 
             {
                 alert("Sorry Incorrect Username & Password");
             }
