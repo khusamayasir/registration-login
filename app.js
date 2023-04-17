@@ -113,9 +113,10 @@ app.post('/api/login', function (req, res) {
       res.send(data);
       console.log('Your login token is', token)
     }
-    else {
-      const data = {count: result.recordset}
-      res.send(data);
+    else if (result["recordset"][0][''] === 0)
+    {
+      const data2 = {count: result.recordset}
+      res.send(data2);
       console.log('Sorry!! Incorrect Username or Password');
     }
     //console.log(`from pool db is connected`,result.recordset);
