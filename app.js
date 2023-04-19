@@ -131,10 +131,12 @@ const configf = {
 //FORGET PASSWORD API
 app.post('/api/forgPasw', function (req, res) {
   console.log(`This is from my end point api/forgetPassword`, req.body)
-  const { username, email, password, phonenumber, gender } = req.body
-  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
+  const { currentPassword, newPassword,   confirmPassword } = req.body
+  const query = `UPDATE usersignup 
+                SET newPassword = '${newPassword}', confirmPassword= '${confirmPassword}'
+                WHERE Password = ${currentPassword}` 
 
-  const pool = new sql.ConnectionPool(config);
+  const pool = new sql.ConnectionPool(configf);
   
   pool.connect().then(() => {
     return pool.request().query(query);
