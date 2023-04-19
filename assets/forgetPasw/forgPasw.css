@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased
+}
+
+body {
+    background: #733eb9;
+    font-family: rubik,sans-serif;
+    display: flex;
+    align-items: center;  
+}
+
+.forgPasw-form {
+    background: #fff;
+    width: 500px;
+    margin: 65px auto;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    border-radius: 4px;
+    box-shadow: 0 2px 25px rgba(0,0,0,.2)
+}
+
+.forgPasw-form h1 {
+    padding: 35px 35px 0;
+    font-weight: 300
+}
+
+.forgPasw-form .content {
+    display: flex; 
+    padding: 35px;
+}
+
+.forgPasw-form .label-field {
+    flex: 1;
+    padding: 12px 5px
+}
+
+.forgPasw-form .label-field input {
+    font-size: 16px;
+    display: block;
+    font-family: rubik,sans-serif;
+    width: 100%;
+    padding: 10px 1px;
+    border: 0;
+    border-bottom: 1px solid #747474;
+    outline: none;
+    -webkit-transition: all .2s;
+    transition: all .2s
+}
+
+.forgPasw-form .label-field label::-webkit-label-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .label-field label::-moz-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .label-field label:-ms-label-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .label-field input::-ms-label-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .label-field label::placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .label-field label:focus {
+    border-color: #222
+}
+
+.forgPasw-form .input-field {
+    padding: 12px 5px
+}
+
+.forgPasw-form .input-field input {
+    font-size: 16px;
+    display: block;
+    font-family: rubik,sans-serif;
+    width: 100%;
+    padding: 10px 1px;
+    border: 0;
+    border-bottom: 1px solid #747474;
+    outline: none;
+    -webkit-transition: all .2s;
+    transition: all .2s
+}
+
+.forgPasw-form .input-field input::-webkit-input-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .input-field input::-moz-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .input-field input:-ms-input-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .input-field input::-ms-input-placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .input-field input::placeholder {
+    text-transform: uppercase
+}
+
+.forgPasw-form .input-field input:focus {
+    border-color: #222
+}
+
+.forgPasw-form a.link {
+    text-decoration: none;
+    color: #747474;
+    letter-spacing: .2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 20px
+}
+
+.forgPasw-form .action {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+}
+
+.forgPasw-form .action button {
+    width: 100%;
+    border: none;
+    padding: 18px;
+    font-family: rubik,sans-serif;
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #e8e9ec;
+    color: #777;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
+    letter-spacing: .2px;
+    outline: 0;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.forgPasw-form .action button:hover {
+    background: #d8d8d8
+}
+
+.forgPasw-form .action button:nth-child(2) {
+    background: #2d3b55;
+    color: #fff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px
+}
+
+.forgPasw-form .action button:nth-child(2):hover {
+    background: #3c4d6d
+}

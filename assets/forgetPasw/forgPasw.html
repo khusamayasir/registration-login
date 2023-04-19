@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./forgPasw.css">
     <title>Forget Password</title>
 </head>
 <body>
     <div class="forgPasw-form">
         <form>
-            <h1 style="padding: 35px 35px 0; font-weight: 300">Forget Password</h1>
+            <h1 style="padding: 45px 45px 0; font-weight: 300">Forget Password</h1>
             <div class="content" style=" display: flex; padding: 35px;" >
                 <div class="label-field" style="flex: 2;">
                     <br><label for="currentPassword">Current Password:</label><br><br><br><br>
@@ -25,12 +26,11 @@
                     
                     <!-- Confirm Password -->
                     <input type="password" id="conpsw" placeholder="Confirm your Password"><br><br>
-                    </div>
                 </div>
             </div>
-            <div class="action" style="padding: 35px 0px 35px;">
-                <!-- <button onclick="postVal()">Register</button> -->
-                <button id="changeMe">Change Password</button>
+            <div class="action">
+                    <button formaction="./login.html">Cancel</button>
+                    <button id="changeMe">Change Password</button>
             </div>
         </form>
     </div>
