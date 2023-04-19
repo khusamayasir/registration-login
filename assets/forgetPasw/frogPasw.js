@@ -15,14 +15,14 @@ function changePassword() {
     }
     console.log(data, `I got this data here from post val func`)
 
-    // fetch('/api/signup', {
-    //     method: "POST",
-    //     body: JSON.stringify(data),
-    //     headers: new Headers({'content-type': 'application/json'}),
-    // }).then(res => {
-    //     console.log(res)
-    // }).catch(err => {
-    //     console.log(err)
-    // })
-    // console.log(username, email, password, phonenumber, gender);
+    fetch('/api/forgetPasw', {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: new Headers({'content-type': 'application/json'}),
+    }).then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log(err)
+    })
+    console.log(username, email, password, phonenumber, gender);
 }

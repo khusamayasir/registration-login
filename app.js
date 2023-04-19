@@ -129,7 +129,7 @@ const configf = {
 };
 
 //FORGET PASSWORD API
-app.post('/api/forgPasw', function (req, res) {
+app.post('/api/forgetPassword', function (req, res) {
   console.log(`This is from my end point api/forgetPassword`, req.body)
   const { currentPassword, newPassword,   confirmPassword } = req.body
   const query = `UPDATE usersignup 
