@@ -56,16 +56,15 @@ btn.addEventListener('click', event => {
         const Token = sessionStorage.getItem("token");
         console.log("Generated Token is: ", Token);
   
-        if (Token)
+        if (result.access_token != undefined)
         {
-          alert(ifrun)
+          alert("ifrun")
           console.log(result);
           window.location.href = "/home.html";
         }
         else
-        alert("Sorry, incorrect username and password.");
         {
-
+          alert("Sorry, incorrect username and password.");
         }
       })
       .catch(error => {
