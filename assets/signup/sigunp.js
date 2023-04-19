@@ -21,9 +21,7 @@ function postVal() {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({'content-type': 'application/json'}),
-        //data: JSON.stringify(data)
     }).then(res => {
-        // console.log("Congratulations!! You've Successfully Login.")
         console.log(res)
     }).catch(err => {
         console.log(err)
