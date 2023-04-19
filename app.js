@@ -44,7 +44,7 @@ const config = {
 // Set the JWT secret key
 const JWT_SECRET_KEY = 'my_secret_key';
 
-//SIGNUP APPI
+//SIGNUP API
 app.post('/api/signup', function (req, res) {
   console.log(`This is from my end point api/signup`, req.body)
   const { username, email, password, phonenumber, gender } = req.body
@@ -77,7 +77,7 @@ const configl = {
   }
 };
 
-//LOGIN APPI
+//LOGIN API
 app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const {email, password } = req.body
@@ -112,6 +112,39 @@ app.post('/api/login', function (req, res) {
   }).catch(err => {
     console.log(err)
     res.status(500).send("Error querying database")
+  });
+})
+
+//SQL CONNECTION For ForgetPassword
+const configf = {
+  server: 'ppsserver2',
+  database: 'registration-login',
+  user: 'sa',
+  password: 'Admin@123',
+  port: 1433, // Default MSSQL port is 1433
+  options: {
+    encrypt: true, // For secure connection
+    trustServerCertificate: true,
+  }
+};
+
+//FORGET PASSWORD API
+app.post('/api/forgPasw', function (req, res) {
+  console.log(`This is from my end point api/forgetPassword`, req.body)
+  const { username, email, password, phonenumber, gender } = req.body
+  const query = `INSERT INTO usersignup (UserName, Email, Password, PhoneNumber, Gender) VALUES ('${username}', '${email}', '${password}', '${phonenumber}', '${gender}')` 
+
+  const pool = new sql.ConnectionPool(config);
+  
+  pool.connect().then(() => {
+    return pool.request().query(query);
+  }).then(result => {  
+    console.log(`this is my result from db`, result.recordset)
+    res.send("User inserted into database")
+    //console.log(`from pool db is connected`,result.recordset);
+  }).catch(err => {
+    console.log(err)
+    res.status(500).send("Error inserting user into database")
   });
 })
 
