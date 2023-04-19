@@ -15,7 +15,7 @@ function changePassword() {
     }
     console.log(data, `I got this data here from post val func`)
 
-    fetch('/api/forgetPasw', {
+    fetch('/api/forgetPassword', {
         method: "POST",
         body: JSON.stringify(data),
         headers: new Headers({'content-type': 'application/json'}),
@@ -24,5 +24,5 @@ function changePassword() {
     }).catch(err => {
         console.log(err)
     })
-    console.log(username, email, password, phonenumber, gender);
+    //console.log(username, email, password, phonenumber, gender);
 }
