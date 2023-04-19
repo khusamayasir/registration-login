@@ -1,4 +1,4 @@
-var btn = document.getElementById(`clickMe`);
+const btn = document.getElementById("clickMe");
 
 console.log(`this is my btn element from login js file`, btn)
 
@@ -15,4 +15,4 @@ btn.addEventListener('click', function() {
   //   let Token = sessionStorage.getItem("token");
   //   console.log(Token);
   //   window.location.href = "/home.html";
-  // });
+  // });r

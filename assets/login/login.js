@@ -71,8 +71,6 @@ btn.addEventListener('click', event => {
         console.log(error);
       });
   });
-  
-  
 
 function getVal(url) {
     return new Promise((resolve, reject) => {
