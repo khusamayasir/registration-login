@@ -83,7 +83,6 @@ app.post('/api/login', function (req, res) {
   console.log(`This is from my end point api/login`, req.body)
   const {email, password } = req.body
   const query_login = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}' AND Password= '${password}'`;
-  // console.log(email,password)
 
   const pool = new sql.ConnectionPool(configl);
 
@@ -117,7 +116,7 @@ app.post('/api/login', function (req, res) {
 })
 
 //SQL CONNECTION For ForgetPassword
-const configf = {
+const confige = {
   server: 'ppsserver2',
   database: 'registration-login',
   user: 'sa',
@@ -129,25 +128,40 @@ const configf = {
   }
 };
 
-//FORGET PASSWORD API
-app.post('/api/forgetPassword', function (req, res) {
-  console.log(`This is from my end point api/forgetPassword`, req.body)
-  const { currentPassword, newPassword,   confirmPassword } = req.body
-  const query = `UPDATE usersignup 
-                SET newPassword = '${newPassword}', confirmPassword= '${confirmPassword}'
-                WHERE Password = ${currentPassword}` 
+//EMAIL VERIFY TO FORGET PASSWORD API
+app.post('/api/emailForgPasw', function (req, res) {
+  console.log(`This is from my end point api/emailForgPasw`, req.body)
+  const {password } = req.body
+  const query_verify = `SELECT COUNT(*) FROM usersignup WHERE Password= '${password}'`;
 
-  const pool = new sql.ConnectionPool(configf);
-  
+  const pool = new sql.ConnectionPool(confige);
+
   pool.connect().then(() => {
-    return pool.request().query(query);
-  }).then(result => {  
+    return pool.request().query(query_verify);
+  }).then(result => {
+    // let Result=JSON.parse(result)
     console.log(`this is my result from db`, result.recordset)
-    res.send("User inserted into database")
-    //console.log(`from pool db is connected`,result.recordset);
+    //res.send(result)
+
+    if(result["recordset"][0][''] === 1) 
+    {
+      // // Generate a JWT token
+      // const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
+
+      // // Return the token in the response
+      // const data = {access_token: token, count: result.recordset}
+      res.send(data);
+      console.log('Your Data is Matched')
+    }
+    else if (result["recordset"][0][''] === 0)
+    {
+      const data = {count: result.recordset}
+      res.send(data);
+      console.log('Sorry!! Incorrect Email address');
+    }
   }).catch(err => {
     console.log(err)
-    res.status(500).send("Error inserting user into database")
+    res.status(500).send("Error querying database")
   });
 })
 
