@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static('assets/login/'));
 app.use(express.static('assets/signup/'));
 app.use(express.static('assets/home/'));
+app.use(express.static('assets/emailForgPasw/'));
 app.use(express.static('assets/forgetPasw/'));
 
 //Initialize the express-session
