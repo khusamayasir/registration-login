@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const { myDb } = require('./data');
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc'; //Using AES encryption
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
 
 const app = express();
 
@@ -115,7 +119,7 @@ app.post('/api/login', function (req, res) {
   });
 })
 
-//SQL CONNECTION For ForgetPassword
+//SQL CONNECTION For EmailVerification to ForgetPassword
 const confige = {
   server: 'ppsserver2',
   database: 'registration-login',
@@ -142,9 +146,16 @@ app.post('/api/email', function (req, res) {
     // let Result=JSON.parse(result)
     console.log(`this is my result from db`, result.recordset)
     //res.send(result)
+    
+    const query_retrivedata = `SELECT * FROM usersignup WHERE Email= '${email}'`;
 
     if(result["recordset"][0][''] === 1) 
     {
+      pool.connect().then(() => {
+        return pool.request().query(query_retrivedata);
+      })
+
+      console.log(query_retrivedata); 
       // // Generate a JWT token
       // const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
 
@@ -168,4 +179,4 @@ app.post('/api/email', function (req, res) {
 //Running App on port 3000 :)
 app.listen(3000, () => {
   console.log("Application started and Listening on port 3000");
-});
+}); 
