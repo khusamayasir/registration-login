@@ -4,22 +4,22 @@ console.log(`this is my btn element from login js file`, btn)
 
 btn.addEventListener('click', event => {
     event.preventDefault();
-    verifyEmail('/api/emailForgPasw')
+    verifyEmail('/api/email')
       .then(result => {
         // sessionStorage.setItem("token", result.access_token);
         // const Token = sessionStorage.getItem("token");
         // console.log("Generated Token is: ", Token);
-  
-        if (result.access_token != undefined)
-        {
-          alert("ifrun")
-          console.log(result);
-          window.location.href = "/forgPasw.html";
-        }
-        else
-        {
-          alert("Sorry, incorrect Email address");
-        }
+        alert("ifrun")
+        console.log(result);
+        window.location.href = "/forgPasw.html";
+        // if (result.access_token != undefined)
+        // {
+
+        // }
+        // else
+        // {
+        //   alert("Sorry, incorrect Email address");
+        // }
       })
       .catch(error => {
         console.log(error);
