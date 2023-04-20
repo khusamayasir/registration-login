@@ -4,13 +4,19 @@ UserName varchar(100),
 Email varchar(100),
 Password varchar(100),
 PhoneNumber BIGINT NOT NULL,
-Gender varchar(15)
+Gender varchar(15),
+newPassword varchar(100),
+confirmPassword varchar(100)
 );
---
--- DROP TABLE usersigunp
--- DROP TABLE usersignup
+
+--DROP TABLE usersignup
 
 
+INSERT INTO usersignup (Username, Email, Password, PhoneNumber, Gender)
+VALUES ('KhawajaUsamaYasir', 'usamayasir32@gmail.com', 'Usama@123', 03492402306, 'Male')
 
-INSERT INTO usersignup (Username, Email, Password, PhoneNumber)
-VALUES ('KhawajaUsamaYasir', 'usamayasir32@gmail.com', 'Usama@123', 03492402306)
+select * from usersignup
+
+UPDATE usersignup
+SET Password = 'usama@123'
+WHERE Password = 'Usama@123';
