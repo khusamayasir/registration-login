@@ -130,7 +130,7 @@ const confige = {
 
 //EMAIL VERIFY TO FORGET PASSWORD API
 app.post('/api/email', function (req, res) {
-  console.log(`This is from my end point api/email`, req.body)
+  console.log(`This is from my end point api/emailForgPasw`, req.body)
   const {email } = req.body
   const query_verify = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}'`;
 
@@ -149,7 +149,7 @@ app.post('/api/email', function (req, res) {
       // const token = jwt.sign({ sub: password }, JWT_SECRET_KEY, { expiresIn: '30m' });
 
       // // Return the token in the response
-      // const data = {access_token: token, count: result.recordset}
+      const data = {count: result.recordset}
       res.send(data);
       console.log('Your Data is Matched')
     }
