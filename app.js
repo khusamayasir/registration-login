@@ -129,8 +129,8 @@ const confige = {
 };
 
 //EMAIL VERIFY TO FORGET PASSWORD API
-app.post('/api/emailForgPasw', function (req, res) {
-  console.log(`This is from my end point api/emailForgPasw`, req.body)
+app.post('/api/email', function (req, res) {
+  console.log(`This is from my end point api/email`, req.body)
   const {email } = req.body
   const query_verify = `SELECT COUNT(*) FROM usersignup WHERE Email= '${email}'`;
 
