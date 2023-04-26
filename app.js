@@ -1,17 +1,18 @@
 const sql = require('mssql');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');	
+const nodemailer = require('nodemailer');
 const session = require('express-session');
 const { myDb } = require('./data');
 const crypto = require('crypto');
-const algorithm = 'aes-256-cbc'; //Using AES encryption
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+// const algorithm = 'aes-256-cbc'; //Using AES encryption
+// const key = crypto.randomBytes(32);
+// const iv = crypto.randomBytes(16);
 
 const app = express();
 
-//Call Signup & Login Pages
+//Call Signup & Login Pages aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -175,6 +176,35 @@ app.post('/api/email', function (req, res) {
     res.status(500).send("Error querying database")
   });
 })
+
+//Nodemailer Module
+
+//Create Nodemailer transporter using  Gmail
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.USER, //   you can use directly user: 'youremail@gmail.com',
+   pass: process.env.PASS //  you can use instead    pass: 'yourpassword'
+  }
+});
+
+// Setting up the mailOptions
+  const mailOptions = {
+   from: process.env.EMAIL_FROM,
+  to: email, // the user email
+  subject: ' for example: Reset your Password',
+  text: 'Reset Password mail',
+   html: <h4>Reset Password</h4> // add your HTML code here.
+                    
+};
+
+//Deliver the mailOptions using the sendMail()
+const  info = transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log("Message sent: %s", info.messageId);
+});
 
 //Running App on port 3000 :)
 app.listen(3000, () => {
